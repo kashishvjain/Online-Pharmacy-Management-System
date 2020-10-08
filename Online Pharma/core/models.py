@@ -22,12 +22,7 @@ class Medicine(models.Model):
         })
 
 
-
-
-
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
-
-
     ordered_date = models.DateTimeField()
