@@ -2,6 +2,7 @@
 {% load static %}
 
 
+
 <html lang="en">
 
 <head>
@@ -10,7 +11,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Material Design Bootstrap</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href='{% static "https://use.fontawesome.com/releases/v5.11.2/css/all.css" %}'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
   <link href='{%static "css/bootstrap.min.css"%}' rel="stylesheet">
   <!-- Material Design Bootstrap -->
@@ -122,24 +123,8 @@
     </div>
   </main>
   <!--Main layout-->
+{% include "footer.html" %}
 
-  <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-
-
-    <hr class="my-4">
-
-    <!-- Social icons -->
-    <div class="pb-4">
-
-    </div>
-    <!-- Social icons -->
-
-
-
-  </footer>
-  <!--/.Footer-->
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
@@ -156,6 +141,7 @@
     new WOW().init();
 
   </script>
+
 </body>
 
 </html>
