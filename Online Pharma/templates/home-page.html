@@ -19,8 +19,8 @@
   <link href='{%static "css/style.min.css"%}' rel="stylesheet">
   <style type="text/css">
     html,
-    body { 
-    padding-top:50px; 
+    body {
+    padding-top:50px;
     }
     header,
     .carousel {
@@ -70,19 +70,19 @@
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        
+
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              
+
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Orders </span>
             </a>
           </li>
-          
-          
+
+
         </ul>
 
       </div>
@@ -91,12 +91,12 @@
   </nav>
   <!-- Navbar -->
 
-  
+
   <!--Main layout-->
   <main>
     <div class="container">
 
-      
+
 
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
@@ -106,7 +106,7 @@
           {% for item in items %}
           <!--Grid column-->
           <div class="col-lg-3 col-md-6 mb-4">
-          
+
             <!--Card-->
             <div class="card">
 
@@ -123,13 +123,13 @@
               <!--Card content-->
               <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href="" class="grey-text">
+                <a href="{{item.get_absolute_url}}" class="grey-text">
                   <h5>{{ item.generic_name }}</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">{{ item.name }}
-                      
+                    <a href="{{item.get_absolute_url}}" class="dark-grey-text">{{ item.name }}
+
                     </a>
                   </strong>
                 </h5>
@@ -143,9 +143,9 @@
 
             </div>
             <!--Card-->
-          
+
           </div>
-          
+
           <!--Grid column-->
           {% endfor %}
         </div>
@@ -154,7 +154,7 @@
       </section>
       <!--Section: Products v.3-->
 
-      
+
 
     </div>
   </main>
@@ -169,7 +169,7 @@
 
     <!-- Social icons -->
     <div class="pb-4">
-      
+
     </div>
     <!-- Social icons -->
 

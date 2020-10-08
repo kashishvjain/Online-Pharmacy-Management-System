@@ -19,19 +19,19 @@
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        
+
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              
-              
+
+
               <span class="clearfix d-none d-sm-inline-block"> Orders </span>
             </a>
           </li>
-          
-          
+
+
         </ul>
 
       </div>
@@ -48,7 +48,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <img src="https://veganfoodandliving-1321f.kxcdn.com/wp-content/uploads/2019/03/featured.jpg" class="img-fluid" alt="" height="400vh" width="400vh">
 
         </div>
         <!--Grid column-->
@@ -61,39 +61,33 @@
 
             <div class="mb-3">
               <a href="">
-                <span class="badge purple mr-1">XX</span>
+                <span class="badge purple mr-1">{{object.generic_name}}</span>
               </a>
             </div>
 
             <p class="lead">
-              
+
               <span>$100</span>
-              
-              
-              
-              
+
+
+
+
             </p>
 
-            <p class="lead font-weight-bold">Description</p>
+            <p class="lead font-weight-bold">Effects</p>
 
-            <p>Lorem</p>
+            <p>{{object.effects}}</p>
 
-            {% comment %} <form class="d-flex justify-content-left">
-              <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">
-                Add to cart
-                <i class="fas fa-shopping-cart ml-1"></i>
-              </button>
+            <p class="lead font-weight-bold">Side Effects</p>
 
-            </form> {% endcomment %}
+            <p>{{object.side_effects}}</p>
+
+
             <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
-              Add to cart
+              Buy
               <i class="fas fa-shopping-cart ml-1"></i>
             </a>
-            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
-              Remove from cart
-            </a>
+
 
           </div>
           <!--Content-->
@@ -114,9 +108,7 @@
 
           <h4 class="my-4 h4">Additional information</h4>
 
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
-            voluptates,
-            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+          <p>Pharmacy Details</p>
 
         </div>
         <!--Grid column-->
@@ -124,35 +116,7 @@
       </div>
       <!--Grid row-->
 
-      <!--Grid row-->
-      <div class="row wow fadeIn">
 
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-12 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
 
     </div>
   </main>
