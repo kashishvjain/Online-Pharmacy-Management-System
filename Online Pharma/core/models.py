@@ -4,6 +4,13 @@ from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
+
+GENDER = (
+    ('F','Female'),
+    ('M','Male'),
+    ('O','Other'),
+    )
 
 
 class Medicine(models.Model):
@@ -39,3 +46,10 @@ class OrderItem(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     medicine_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     qty = models.IntegerField(default=1)
+
+
+class User(AbstractUser):
+    age = models.CharField(max_length=30, blank=True)
+    phone = models.CharField(max_length=30, blank=True)
+    address = models.CharField(max_length=30,blank=True)
+    gender = models.CharField(max_length=30,blank=True)

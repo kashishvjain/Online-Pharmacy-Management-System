@@ -1,22 +1,30 @@
 from django import forms
 from allauth.account.forms import SignupForm
+from django.contrib.auth import get_user_model
+from .models import User
 
-GENDER = (
-    ('F','Female'),
-    ('M','Male'),
-    ('O','Other'),
-    )
 
 
 class MyCustomSignupForm(SignupForm):
+    class Meta:
+        model = User
+
+    first_name = forms.CharField(max_length=30, label='First Name')
+    last_name = forms.CharField(max_length=30, label='Last Name')
     age = forms.CharField(max_length=30, label='Age')
     phone = forms.CharField(max_length=30, label='Phone Number')
     address = forms.CharField(max_length=30, label='Address')
-    gender = forms.ChoiceField(choices = GENDER,label = 'Gender')
+    gender = forms.CharField(max_length=30,label = 'Gender')
+
+
+
     def signup(self, request, user):
-        user.age = self.cleaned_data['age']
-        user.phone = self.cleaned_data['phone']
-        user.address = self.cleaned_data['address']
-        user.gender = self.cleaned_data['gender']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.get_profile().age = self.cleaned_data['age']
+        user.get_profile().phone = self.cleaned_data['phone']
+        user.get_profile().address = self.cleaned_data['address']
+        user.get_profile().gender = self.cleaned_data['gender']
         user.save()
+
         return user
