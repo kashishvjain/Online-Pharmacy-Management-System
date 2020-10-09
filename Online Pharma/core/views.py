@@ -35,3 +35,7 @@ def cart (request):
 class ItemDetailView(DetailView):
     model = Medicine
     template_name = "product-page.html"
+
+class History(ListView):
+    model = Order
+    template_name = "history.html"
