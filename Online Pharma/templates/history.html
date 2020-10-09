@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
+  <title>Payment History</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -60,67 +60,37 @@
   <main>
     <div class="container">
 
-
-
-      <!--Section: Products v.3-->
-      <section class="text-center mb-4">
-
-        <!--Grid row-->
-        <div class="row wow fadeIn">
-          {% for item in items %}
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="https://veganfoodandliving-1321f.kxcdn.com/wp-content/uploads/2019/03/featured.jpg" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="{{item.get_absolute_url}}" class="grey-text">
-                  <h5>{{ item.generic_name }}</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="{{item.get_absolute_url}}" class="dark-grey-text" id="namepr{{ item.id }}">{{ item.name }}</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>{{ item.price }}</strong>
-                </h4>
-
-                <span id="divpr{{item.id}}" class="divpr">
-                      <button id="pr{{item.id}}"  class="btn btn-md btn-primary cart">Add to Cart</button>
-                </span>
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
+<!--        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
+        </div>-->
+    <div class="row wow fadeIn">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <section>
+            <div class="card">
+              <div class="card-header text-white bg-success text-center py-3">
+                <h5 class="mb-0 font-weight-bold">Summary</h5>
+              </div>
 
-          <!--Grid column-->
-          {% endfor %}
-        </div>
-        <!--Grid row-->
+              <div class="card-body">
+                <ul>
+                  <li><strong>Product 1: </strong>$100</li>
+                  <li><strong>Product 2: </strong>$50</li>
+                  <li><strong>Product 2: </strong>$49</li>
+                </ul>
+              </div>
 
-      </section>
-      <!--Section: Products v.3-->
-
-
-
+              <div class="card-footer bg-white d-flex justify-content-between py-3">
+                <strong>Total amount:</strong>
+                <strong>$199</strong>
+              </div>
+            </div>
+        </section>
+            </div>
+    </div>
     </div>
   </main>
   <!--Main layout-->
@@ -152,10 +122,13 @@
     else
     {
       cart = JSON.parse(localStorage.getItem('cart'));
-      document.getElementById('kart').innerHTML=Object.keys(cart).length;
+      var sum = 0;
+      for(var item in cart){
+          sum = sum + cart[item][0];
+      }
+      document.getElementById('kart').innerHTML=sum;
       updateKart(cart);
     }
-            console.log(cart);
 
     //to increment the item in cart
 
@@ -189,10 +162,8 @@
             popStr = popStr + document.getElementById('name'+item).innerHTML.slice(0,9)+"...  Qty: "+cart[item][0]+"<br>";
             i =i+1;
         }
-    popStr = popStr + `</div> <br>
-  <a href='/cart'><button type="submit" class="btn btn-md btn-primary">buy now</button></a>
-<button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Kart</button>`;
- //console.log(popStr);
+    popStr = popStr + "</div> <br> <a href='/checkout-page'><button class='btn btn-md btn-primary mx-2px' id='checkout'>CheckOut</button></a>  <button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Kart</button>";
+    //console.log(popStr);
     document.getElementById('popkart').setAttribute('data-content',popStr);
     $('#popkart').popover('show')
      {
@@ -200,12 +171,6 @@
       myDefaultWhiteList.button = ['onclick']
      };
     }
-
-    {% if thank %}
-        alert('Thanks for ordering with MAK Medicines. Your order is {{id}}. Use it to track your order using our order tracker');
-        localStorage.clear();
-        document.location = "";
-    {% endif %}
 
     function clearkart() {
         console.log("clearrr");
@@ -219,7 +184,6 @@
     }
 
      function updateKart(cart){
-            console.log(cart);
             var sum = 0;
             for(var item in cart){
               console.log(item);
@@ -232,26 +196,6 @@
             updatePopover(cart);
         }
 
-      $('#itemsJson').val(JSON.stringify(cart));
-
-        //if minus is clicked
-        $('.divpr').on("click", "button.minus", function(){
-            a=this.id.slice(5,);
-            cart[a][0]=Math.max(0,(cart[a][0]-1));
-            document.getElementById('val'+a).innerHTML=cart[a][0];
-            updateKart(cart);
-
-        });
-
-        //if plus is clicked
-        $('.divpr').on("click", "button.plus", function()
-        {
-            console.log(cart);
-            a=this.id.slice(6,);
-            cart['pr'+a][0]=cart['pr'+a][0]+1;
-            document.getElementById('valpr'+a).innerHTML=cart['pr'+a][0];
-            updateKart(cart);
-        });
 
 
   </script>

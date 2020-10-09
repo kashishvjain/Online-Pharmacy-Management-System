@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Cart</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href='{%static "css/bootstrap.min.css"%}' rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href='{%static "css/mdb.min.css"%}' rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href='{%static "css/style.min.css"%}' rel="stylesheet">
+  <style type="text/css">
+    html,
+    body {
+    padding-top:50px;
+    }
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+{% include "navbar.html" %}
+<body>
+
+
+
+
+  <!--Main layout-->
+  <main>
+    <div class="container">
+            <div class="col my-4">
+    <h2>Step 1 - A-kart EXPRESS Checkout - review your items</h2>
+    <div>
+        <ul class="list-group" id="items">
+
+        </ul>
+    </div>
+    </div>
+      <div class="col my-4">
+        <h2>Step 2 - A-kart Customer Details - enter the details</h2>
+          <form method="post" action="/cart/">{% csrf_token %}
+          <input type="hidden" name="itemsJson" id="itemsJson">
+
+
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label for="feedback">Feedback!</label>
+              <input type="text" class="form-control" id="feedback" name="feedback">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+
+
+       <!--
+        <form method="post" action="/">{% csrf_token %}
+          <input type="hidden" name="itemsJson" id="itemsJson">
+            <div class="form-group col-md-2">
+              <label for="zip_code">Zip</label>
+              <input type="text" class="form-control" id="zip_code" name="zip_code">
+            </div>
+
+          <div class="form-group">
+            <div class="form-group col-md-6">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+
+          </div>
+          <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>-->
+      </div>
+
+
+    </div>
+  </main>
+  <!--Main layout-->
+{% include "footer.html" %}
+
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src='{% static "js/jquery-3.4.1.min.js"%}'></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src='{% static "js/popper.min.js"%}'></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src='{% static "js/bootstrap.min.js"%}'></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src='{% static "js/mdb.min.js" %}'></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+
+  <script>
+
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+}
+console.log(cart);
+var tot = 0;
+
+if ($.isEmptyObject(cart)) {
+    //if object is empty
+    mystr = '<p>Your cart is empty, please add some items to your cart before checking out!</p>'
+    $('#items').append(mystr);
+} else {
+    for (item in cart) {
+        let name = cart[item][1];
+        let qty = cart[item][0];
+        tot = tot + qty;
+        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+        $('#items').append(mystr);
+    }
+}
+document.getElementById('kart').innerHTML = tot;
+$('#itemsJson').val(JSON.stringify(cart));
+{% if thank %}
+alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
+localStorage.clear();
+document.location = "/";
+{% endif %}
+
+
+  </script>
+
+
+</body>
+
+</html>

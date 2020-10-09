@@ -23,6 +23,15 @@ class Medicine(models.Model):
 
 
 class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    order_json = models.CharField(max_length=1000,default='')
     ordered = models.BooleanField(default=False)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now_add=True)
+
+
+
+class OrderItem(models.Model):
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    medicine_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    qty = models.IntegerField(default=1)
