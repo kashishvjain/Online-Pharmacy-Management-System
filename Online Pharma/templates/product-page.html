@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  
+
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
@@ -21,18 +21,18 @@
         <div class="col-md-6 mb-4">
 
           <!--Content-->
-          <div class="p-4">
+          <!-- <div class="p-4"> -->
 
-            <div class="mb-3">
+            <!-- <div class="mb-3"> -->
               <p class="lead font-weight-bold">{{object.name}}</p>
 
-                <p class="badge purple mr-1">{{object.generic_name}}
+                <h3><p class="badge badge-pill badge-info" >{{object.generic_name}}</p></h3>
 
-            </div>
+            <!-- </div> -->
 
             <p class="lead">
 
-              <span>{{object.price}}</span>
+              <strong><span>Price : Rs.{{object.price}}</span></strong>
 
 
 
@@ -54,7 +54,7 @@
             </a>
 
 
-          </div>
+          <!-- </div> -->
           <!--Content-->
 
         </div>
@@ -71,10 +71,11 @@
         <!--Grid column-->
         <div class="col-md-6 text-center">
 
-          <h4 class="my-4 h4">Additional information</h4>
+          <h4 class="my-4 h4">Pharmacy Information</h4>
 
-          <p>Pharmacy Details</p>
-
+          <strong><p> {{object.pharmacy.name}}</p></strong>
+          <p>{{object.pharmacy.address.apartment_address}} {{object.pharmacy.address.street_address}}</p>
+          <p>{{object.pharmacy.address.country}} {{object.pharmacy.address.zip}}</p>
         </div>
         <!--Grid column-->
 
