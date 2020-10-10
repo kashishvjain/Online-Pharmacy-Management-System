@@ -60,15 +60,15 @@
   <main>
     <div class="container">
             <div class="col my-4">
-    <h2>Step 1 - A-art EXPRESS Checkout - review your items</h2>
-    <div>
+    <h2>Step 1 - MAK Medicine EXPRESS Checkout - Review your items</h2>
+    <div class="container">
         <ul class="list-group" id="items">
 
         </ul>
     </div>
     </div>
       <div class="col my-4">
-        <h2>Step 2 - A-kart Customer Details - enter the details</h2>
+        <h2>Step 2 - Please Enter your Feedback* (optional) </h2>
           <form method="post" action="/cart/">{% csrf_token %}
           <input type="hidden" name="itemsJson" id="itemsJson">
 
@@ -82,25 +82,6 @@
           </div>
           <button type="submit" class="btn btn-primary">Place Order</button>
         </form>
-
-
-       <!--
-        <form method="post" action="/">{% csrf_token %}
-          <input type="hidden" name="itemsJson" id="itemsJson">
-            <div class="form-group col-md-2">
-              <label for="zip_code">Zip</label>
-              <input type="text" class="form-control" id="zip_code" name="zip_code">
-            </div>
-
-          <div class="form-group">
-            <div class="form-group col-md-6">
-              <label for="phone">Phone</label>
-              <input type="text" class="form-control" id="phone" name="phone">
-            </div>
-
-          </div>
-          <button type="submit" class="btn btn-primary">Place Order</button>
-        </form>-->
       </div>
 
 
@@ -141,6 +122,7 @@ if ($.isEmptyObject(cart)) {
     mystr = '<p>Your cart is empty, please add some items to your cart before checking out!</p>'
     $('#items').append(mystr);
 } else {
+
     for (item in cart) {
         let name = cart[item][1];
         let qty = cart[item][0];
@@ -155,7 +137,7 @@ if ($.isEmptyObject(cart)) {
 document.getElementById('kart').innerHTML = tot;
 $('#itemsJson').val(JSON.stringify(cart));
 {% if thank %}
-alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
+alert('Thanks for ordering on MAK Medicines. Continue shopping if you have missed something!');
 localStorage.clear();
 document.location = "/";
 {% endif %}

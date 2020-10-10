@@ -38,6 +38,13 @@
       }
     }
 
+    .card {
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+    .card:hover {opacity: 1}
+
+
     @media (min-width: 800px) and (max-width: 850px) {
 
       html,
@@ -58,8 +65,9 @@
 
   <!--Main layout-->
   <main>
-    <div class="container">
 
+    <div class="container">
+        <h4> <strong> Transaction History: </strong> </h4><br>
 <!--        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
           <div class="card-header">Header</div>
           <div class="card-body">
@@ -68,28 +76,38 @@
           </div>
         </div>-->
     <div class="row wow fadeIn">
+        {% for order,k,tot,onum,ordered in items %}
       <div class="col-lg-3 col-md-6 mb-4">
+
         <section>
             <div class="card">
+                {% if ordered %}
               <div class="card-header text-white bg-success text-center py-3">
-                <h5 class="mb-0 font-weight-bold">Summary</h5>
+                {% else %}
+              <div class="card-header text-white bg-danger text-center py-3">
+                {% endif %}
+
+                <h5 class="mb-0 font-weight-bold">Order:{{onum}}</h5>
+
               </div>
 
-              <div class="card-body">
+              <div class="card-body" style="height: 12rem;">
                 <ul>
-                  <li><strong>Product 1: </strong>$100</li>
-                  <li><strong>Product 2: </strong>$50</li>
-                  <li><strong>Product 2: </strong>$49</li>
+                    {% for item in k %}
+                  <li><strong> {{ item.medicine_id.name }} </strong> ({{ item.qty }} units) </li>
+                    {% endfor %}
                 </ul>
               </div>
 
               <div class="card-footer bg-white d-flex justify-content-between py-3">
                 <strong>Total amount:</strong>
-                <strong>$199</strong>
+                <strong><span>&#8377;</span>{{ tot }}</strong>
               </div>
             </div>
         </section>
+
             </div>
+        {% endfor %}
     </div>
     </div>
   </main>
@@ -155,7 +173,7 @@
 
     function updatePopover(cart) {
         var popStr="";
-        popStr = popStr+"<h5>Kart for item in your shopping kart</h5><div class='mx-2 my-2'>";
+        popStr = popStr+"<h5>Kart for item in your shopping cart</h5><div class='mx-2 my-2'>";
         var i = 1;
         for(var item in cart){
             popStr = popStr + "<b>"+i+". </b>";
@@ -165,7 +183,7 @@
     popStr = popStr + "</div> <br> <a href='/checkout-page'><button class='btn btn-md btn-primary mx-2px' id='checkout'>CheckOut</button></a>  <button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Kart</button>";
     //console.log(popStr);
     document.getElementById('popkart').setAttribute('data-content',popStr);
-    $('#popkart').popover('show')
+    $('#popkart').popover('enable')
      {
       var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
       myDefaultWhiteList.button = ['onclick']
@@ -175,9 +193,6 @@
     function clearkart() {
         console.log("clearrr");
         cart = JSON.parse(localStorage.getItem('cart'));
-        for(var item in cart){
-            document.getElementById('div'+item).innerHTML = '<button id="'+item+'" class="btn btn-md btn-primary cart">Add to Kart</button>';
-        }
         localStorage.clear();
         cart={};
         updateKart(cart);
@@ -189,7 +204,7 @@
               console.log(item);
                 sum = sum + cart[item][0];
                 //document.getElementById('div'+item).innerHTML= "OK";
-                document.getElementById('div'+item).innerHTML= "<button id='minus" +item+ "' class='btn btn-md btn-primary minus'>-</button> <span id='val" +item+ "'>" +cart[item][0]+ "</span> <button id='plus" +item+ "' class='btn btn-md btn-primary plus'>+</button>";
+                //document.getElementById('div'+item).innerHTML= "<button id='minus" +item+ "' class='btn btn-md btn-primary minus'>-</button> <span id='val" +item+ "'>" +cart[item][0]+ "</span> <button id='plus" +item+ "' class='btn btn-md btn-primary plus'>+</button>";
             }
             localStorage.setItem('cart',JSON.stringify(cart));
             document.getElementById('kart').innerHTML=sum;

@@ -24,7 +24,7 @@
           <!-- <div class="p-4"> -->
 
             <!-- <div class="mb-3"> -->
-              <p class="lead font-weight-bold">{{object.name}}</p>
+              <p id="name" class="lead font-weight-bold">{{object.name}}</p>
 
                 <h3><p class="badge badge-pill badge-info" >{{object.generic_name}}</p></h3>
 
@@ -48,10 +48,16 @@
             <p>{{object.side_effects}}</p>
 
 
-            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
-              Buy
-              <i class="fas fa-shopping-cart ml-1"></i>
-            </a>
+<!--
+            <span id="divpr{{object.id}}" class="divpr">
+                  <button type="submit" id="pr{{object.id}}"  class="btn btn-md btn-primary buy">
+                        Buy
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                  </button>
+            </span>
+          <a href='/cart'><button type="submit" class="btn btn-md btn-primary">buy now</button></a>
+-->
+
 
 
           <!-- </div> -->
@@ -90,3 +96,32 @@
   </main>
 
 {% endblock content %}
+
+    {% block extra_scripts %}
+<script>
+
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    localStorage.setItem('cart',JSON.stringify(cart));
+}
+
+$('.divpr').on('click','button.buy',function(){
+    var idstr = this.id.toString();
+    localStorage.clear();
+    qty = 1;
+    name = document.getElementById('name').innerHTML;
+    cart[idstr] =[qty,name];
+    console.log(cart);
+    localStorage.setItem('cart',JSON.stringify(cart));
+});
+
+    var sum = 0;
+    for(var item in cart){
+        sum = sum + cart[item][0];
+    }
+    document.getElementById('kart').innerHTML=sum;
+</script>
+
+    {% endblock extra_scripts %}
