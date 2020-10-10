@@ -24,5 +24,5 @@ class MyCustomSignupForm(SignupForm):
         user.address = self.cleaned_data['address']
         user.gender = self.cleaned_data['gender']
         user.save()
-        user.
+        
         return user
