@@ -182,12 +182,12 @@
     });
 
     $('#popkart').popover();
-    document.getElementById("popkart").setAttribute('data-content','<h5>Kart for your element!</h5><div class="mx-2 my-2">');
+    document.getElementById("popkart").setAttribute('data-content','<h5>Cart for your element!</h5><div class="mx-2 my-2">');
     updatePopover(cart);
 
     function updatePopover(cart) {
         var popStr="";
-        popStr = popStr+"<h5>Kart for item in your shopping kart</h5><div class='mx-2 my-2'>";
+        popStr = popStr+"<h5>Cart for item in your shopping cart</h5><div class='mx-2 my-2'>";
         var i = 1;
         for(var item in cart){
             popStr = popStr + "<b>"+i+". </b>";
@@ -196,27 +196,22 @@
         }
     popStr = popStr + `</div> <br>
   <a href='/cart'><button type="submit" class="btn btn-md btn-primary">buy now</button></a>
-<button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Kart</button>`;
+<button class='btn btn-md btn-primary' onclick='clearkart()' id='clearCart'>Clear Cart</button>`;
  //console.log(popStr);
     document.getElementById('popkart').setAttribute('data-content',popStr);
-    $('#popkart').popover('show')
+    $('#popkart').popover('enable')
      {
       var myDefaultWhiteList = $.fn.tooltip.Constructor.Default.whiteList
       myDefaultWhiteList.button = ['onclick']
      };
     }
 
-    {% if thank %}
-        alert('Thanks for ordering with MAK Medicines. Your order is {{id}}. Use it to track your order using our order tracker');
-        localStorage.clear();
-        document.location = "";
-    {% endif %}
 
     function clearkart() {
         console.log("clearrr");
         cart = JSON.parse(localStorage.getItem('cart'));
         for(var item in cart){
-            document.getElementById('div'+item).innerHTML = '<button id="'+item+'" class="btn btn-md btn-primary cart">Add to Kart</button>';
+            document.getElementById('div'+item).innerHTML = '<button id="'+item+'" class="btn btn-md btn-primary cart">Add to Cart</button>';
         }
         localStorage.clear();
         cart={};
@@ -253,7 +248,7 @@
         {
             console.log(cart);
             a=this.id.slice(6,);
-            cart['pr'+a][0]=cart['pr'+a][0]+1;
+            cart['pr'+a][0]=Math.min(cart['pr'+a][0]+1 , 10);
             document.getElementById('valpr'+a).innerHTML=cart['pr'+a][0];
             updateKart(cart);
         });
