@@ -13,8 +13,7 @@ class MyCustomSignupForm(SignupForm):
     phone = forms.CharField(max_length=30, label='Phone Number')
     address = forms.CharField(max_length=30, label='Address')
     gender = forms.CharField(max_length=30,label = 'Gender')
-    print('FN',first_name)
-    print('Age',age)
+
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
@@ -24,5 +23,5 @@ class MyCustomSignupForm(SignupForm):
         user.address = self.cleaned_data['address']
         user.gender = self.cleaned_data['gender']
         user.save()
-        
+
         return user
