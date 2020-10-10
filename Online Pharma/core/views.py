@@ -10,19 +10,26 @@ def item_list(request):
     return render(request, "home-page.html", context)
 
 def history(request):
-    return render(request,"history.html")
+    orders = Order.objects.filter( user=request.user)
+    items=[]
+    onum=1
+    for order in orders:
+        item=OrderItem.objects.filter(order_id=order)
+        tot=0
+        for i in item:
+            tot += (i.medicine_id.price * i.qty)
+        items.append([orders,item,tot,onum,order.ordered])
+        onum += 1
+    return render(request, "history.html",{'items':items})
+
 
 def cart (request):
     if request.method == "POST":
         items_json = request.POST.get('itemsJson','')
         dic = json.loads(items_json)
         thank=True
-        #user = self.request.user
         order = Order(order_json=items_json, user=request.user, ordered=thank)
         order.save()
-        oid = order.order_id
-        #cid = order.user
-        print(dic)
         for x,y in dic.items():
             med_id = int(x[2:])
             medi = Medicine(id=med_id)
@@ -31,6 +38,8 @@ def cart (request):
             order_item.save()
         return render(request, "cart.html", {'thank':thank, 'id':id})
     return render(request,"cart.html")
+
+
 
 class ItemDetailView(DetailView):
     model = Medicine
